@@ -1,8 +1,10 @@
 {
   "name": "@tbosmans/factories-ts",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Factories to help writing specs.",
-  "main": "src/index.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": ["build"],
   "homepage": "https://github.com/TomBosmans/factories-ts#readme",
   "author": "Tom Bosmans",
   "bugs": {
@@ -26,7 +28,8 @@
     "format:check": "prettier --check .",
     "lint": "eslint --fix .",
     "lint:check": "eslint .",
-    "test": "vitest"
+    "test": "vitest",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
