@@ -1,12 +1,12 @@
 {
-  "name": "@tbosmans/factories",
+  "name": "@tbosmans/factories-ts",
   "version": "0.0.1",
   "description": "Factories to help writing specs.",
   "main": "src/index.ts",
-  "homepage": "https://github.com/TomBosmans/factories#readme",
+  "homepage": "https://github.com/TomBosmans/factories-ts#readme",
   "author": "Tom Bosmans",
   "bugs": {
-    "url": "https://github.com/TomBosmans/factories/issues"
+    "url": "https://github.com/TomBosmans/factories-ts/issues"
   },
   "keywords": [
     "typescript",
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TomBosmans/factories.git"
+    "url": "git+https://github.com/TomBosmans/factories-ts.git"
   },
   "license": "ISC",
   "prettier": "@tbosmans/eslint-config/prettierrc"
