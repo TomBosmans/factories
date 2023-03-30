@@ -1,15 +1,18 @@
-## What is this?
-This is a TypeScript class named BaseFactory which serves as a base class for other factory classes to be extended from. The class has two generic type parameters, BuildAttributes and CreateAttributes, which are used to define the types of the attributes that can be built and created by the factory respectively.
+## Why?
+When writing tests, it's important to focus on the specific attributes that are relevant to the test scenario, without getting bogged down in the details of record creation or attribute values. This approach avoids cluttered and hard-to-read tests, and allows developers to write more effective and efficient tests.
 
-The class has four public methods:
-  - build: This method accepts an optional parameter params of type Partial<BuildAttributes> and returns an object of type BuildAttributes. The method generates a new object using the generate() method, and merges it with the params object (if provided) using the spread operator.
-  - buildMany: This method accepts two parameters, times of type number and params of type Partial<BuildAttributes> which is optional. It returns an array of objects of type BuildAttributes. This method generates an array of length times and maps each element to a new object using the build() method.
-  - create: This method accepts an optional parameter params of type Partial<BuildAttributes> and returns a promise that resolves to an object of type CreateAttributes. This method generates a new object using the build() method and passes it to the save() method to persist the object.
-  - createMany: This method accepts two parameters, times of type number and params of type Partial<BuildAttributes> which is optional. It returns a promise that resolves to an array of objects of type CreateAttributes. This method generates an array of length times using the buildMany() method and saves each object using the save() method.
+## How does this work?
+This is a TypeScript class named `BaseFactory` which serves as a base class for other factory classes to be extended from. The class has two generic type parameters, `BuildAttributes` and `CreateAttributes`, which are used to define the types of the attributes that can be built and created by the factory respectively.
 
-The class also has two protected methods:
-  - save: This method accepts an object of type BuildAttributes and returns a promise that resolves to an object of type CreateAttributes. This method is responsible for persisting the object.
-  - generate: This method returns an object of type BuildAttributes. This method is used to generate a new object when the build() method is called without any parameters. The default implementation returns an empty object of type BuildAttributes.
+- The class has four public methods:
+  1. `build`: This method accepts an optional parameter params of type Partial<BuildAttributes> and returns an object of type BuildAttributes. The method generates a new object using the generate() method, and merges it with the params object (if provided) using the spread operator.
+  2. `buildMany`: This method accepts two parameters, times of type number and params of type Partial<BuildAttributes> which is optional. It returns an array of objects of type BuildAttributes. This method generates an array of length times and maps each element to a new object using the build() method.
+  3. `create`: This method accepts an optional parameter params of type Partial<BuildAttributes> and returns a promise that resolves to an object of type CreateAttributes. This method generates a new object using the build() method and passes it to the save() method to persist the object.
+  4. `createMany`: This method accepts two parameters, times of type number and params of type Partial<BuildAttributes> which is optional. It returns a promise that resolves to an array of objects of type CreateAttributes. This method generates an array of length times using the buildMany() method and saves each object using the save() method.
+
+- The class also has two protected methods:
+  1. `save`: This method accepts an object of type BuildAttributes and returns a promise that resolves to an object of type CreateAttributes. This method is responsible for persisting the object.
+  2. `generate`: This method returns an object of type BuildAttributes. This method is used to generate a new object when the build() method is called without any parameters. The default implementation returns an empty object of type BuildAttributes.
 
 ## Example in nestjs with prisma and faker:
 ```ts
@@ -25,15 +28,13 @@ export class UserFactory extends BaseFactory<BuildAttr, CreateAttr> {
 
   protected async save(data: BuildAttr): Promise<CreateAttr> {
     await this.handleRole(data.userRoleId)
-    const user = await this.prisma.user.create({
+    return await this.prisma.user.create({
       data: {
         ...data,
         email: data.email.toLowerCase(),
         password: await hash(data.password, 10),
       },
     })
-
-    return user
   }
 
   // generate random data
@@ -57,7 +58,7 @@ export class UserFactory extends BaseFactory<BuildAttr, CreateAttr> {
 }
 ```
 
-Now in a spec you can do the following:
+Now in a jest spec you can do the following:
 ```ts
 describe("", () => {
   let module: TestingModule
