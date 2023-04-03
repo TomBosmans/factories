@@ -2,6 +2,14 @@ name: Publish to NPM
 
 on:
   workflow_dispatch:
+    inputs:
+      version-type:
+        type: choice
+        description: Version type
+        options: 
+        - patch
+        - minor
+        - major
 
 jobs:
   publish:
@@ -17,7 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          version-type:  'minor'
+          version-type:  ${{github.event.inputs.version-type}}
 
       - name: Get version from package.json
         id: get_version
