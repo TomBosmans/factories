@@ -1,10 +1,12 @@
 {
   "name": "@tbosmans/factories-ts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Factories to help writing specs.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "homepage": "https://github.com/TomBosmans/factories-ts#readme",
   "author": "Tom Bosmans",
   "bugs": {
