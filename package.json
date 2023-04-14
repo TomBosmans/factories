@@ -19,7 +19,7 @@
   ],
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
-    "@tbosmans/eslint-config": "^1.0.3",
+    "@tbosmans/eslint-config": "^2.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.3",
     "vite": "^4.2.1",
@@ -38,5 +38,11 @@
     "url": "git+https://github.com/TomBosmans/factories-ts.git"
   },
   "license": "ISC",
-  "prettier": "@tbosmans/eslint-config/prettierrc"
+  "prettier": "@tbosmans/eslint-config/prettierrc",
+  "eslintConfig": {
+    "extends": [
+      "@tbosmans/eslint-config/default",
+      "@tbosmans/eslint-config/typescript"
+    ]
+  }
 }
